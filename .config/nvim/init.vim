@@ -1,3 +1,7 @@
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+
 if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
@@ -25,9 +29,11 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
+Plug 'benekastah/neomake'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
@@ -41,8 +47,11 @@ Plug 'honza/vim-snippets'
 
 "" Color
 Plug 'mhartington/oceanic-next'
+Plug 'gh123man/vim-atom-dark-modded-256'
+Plug 'kassio/neoterm'
 
-
+Plug 'rizzatti/dash.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 "*****************************************************************************
 "" Custom bundles
@@ -71,6 +80,12 @@ Plug 'jelera/vim-javascript-syntax'
 
 
 call plug#end()
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#disable_auto_complete = 1
+
+let g:python2_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Required:
 filetype plugin indent on
@@ -142,7 +157,9 @@ if !exists('g:not_finish_vimplug')
 
   " Theme
   syntax enable
-  colorscheme OceanicNext
+
+  set background=dark
+  colorscheme atom-dark
 endif
  
 
@@ -150,13 +167,61 @@ endif
 set gcr=a:blinkon0
 set scrolloff=3
 
+" change cursor to bar in insert mode
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" run tests with :T
+let test#strategy = "neoterm"
+
+" pretty much essential: by default in terminal mode, you have to press ctrl-\-n to get into normal mode
+" ain't nobody got time for that
+tnoremap <Esc> <C-\><C-n>
+
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_elixir_enabled_makers = ['mix', 'credo']
+
+" Neoterm
+
+let g:neoterm_position = 'vertical'
+let g:neoterm_automap_keys = ',tt'
+
+" Useful maps
+" hide/close terminal
+nnoremap <silent> ,th :call neoterm#close()<cr>
+" clear terminal
+nnoremap <silent> ,tl :call neoterm#clear()<cr>
+" kills the current job (send a <c-c>)
+nnoremap <silent> ,tc :call neoterm#kill()<cr>
+
+
+" Sane tabs
+" - Two spaces wide
+set tabstop=2
+set softtabstop=2
+" - Expand them all
+set expandtab
+" - Indent by 2 spaces by default
+set shiftwidth=2
+
+set number " line numbering
+
+set encoding=utf-8
+
+
+" Check syntax with neomake when writing file
+autocmd! BufWritePost * Neomake
 "" Status bar
+
+" Don't tell me to use smartquotes in markdown ok?
+let g:neomake_markdown_enabled_makers = []
+
 set laststatus=2
 
 "" Use modeline overrides
 set modeline
 set modelines=10
 
+" Set the title of the iterm tab
 set title
 set titleold="Terminal"
 set titlestring=%F
@@ -182,6 +247,9 @@ let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeWinSize = 50
+" Git marker for nerdtree
+let g:NERDTreeShowIgnoredStatus=0
+
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -287,6 +355,9 @@ vmap > >gv
 "" Open current line on GitHub
 nnoremap <Leader>o :.Gbrowse<CR>
 
+" NERDTree shortcuts
+nnoremap <C-p> :NERDTreeToggle<CR>
+
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
@@ -313,6 +384,9 @@ augroup vimrc-javascript
   autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
 augroup END
 
+
+set diffopt=vertical,filler
+autocmd FileType git set nofoldenable
 
 "*****************************************************************************
 "*****************************************************************************
