@@ -60,6 +60,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " elixir
 Plug 'elixir-lang/vim-elixir'
 Plug 'carlosgaldino/elixir-snippets'
+Plug 'slashmili/alchemist.vim'
 
 
 " erlang
@@ -84,11 +85,16 @@ call plug#end()
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#disable_auto_complete = 1
 
-let g:python2_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.13/bin/python'
+let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.5.2/bin/python3'
 
 " Required:
 filetype plugin indent on
+
+" Let <Tab> also do completion
+inoremap <silent><expr> <Tab>
+\ pumvisible() ? "\<C-n>" :
+\ deoplete#mappings#manual_complete()
 
 
 "*****************************************************************************
