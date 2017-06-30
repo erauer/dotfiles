@@ -92,7 +92,7 @@ let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.5.2/bin/python3'
 filetype plugin indent on
 
 " Let <Tab> also do completion
-inoremap <silent><expr> <Tab>
+inoremap <silent><expr> <S-Tab>
 \ pumvisible() ? "\<C-n>" :
 \ deoplete#mappings#manual_complete()
 
@@ -167,7 +167,7 @@ if !exists('g:not_finish_vimplug')
   set background=dark
   colorscheme atom-dark
 endif
- 
+
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -387,7 +387,8 @@ let g:javascript_enable_domhtmlcss = 1
 " vim-javascript
 augroup vimrc-javascript
   autocmd!
-  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
+  autocmd BufWritePre * %s/\s\+$//e
+  autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2
 augroup END
 
 
