@@ -33,6 +33,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+
 Plug 'benekastah/neomake'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -378,7 +381,7 @@ let erlang_show_errors = 1
 
 " html
 " for html files, 2 spaces
-autocmd Filetype html setlocal ts=2 sw=2 expandtab
+autocmd Filetype html setlocal ts=2 sw=2 sts=2 expandtab
 
 
 " javascript
@@ -388,7 +391,7 @@ let g:javascript_enable_domhtmlcss = 1
 augroup vimrc-javascript
   autocmd!
   autocmd BufWritePre * %s/\s\+$//e
-  autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab|set softtabstop=2
+  autocmd FileType javascript setlocal ts=2 sw=2 sts=2 expandtab
 augroup END
 
 
