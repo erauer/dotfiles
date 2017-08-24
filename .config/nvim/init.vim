@@ -51,10 +51,15 @@ Plug 'honza/vim-snippets'
 "" Color
 Plug 'mhartington/oceanic-next'
 Plug 'gh123man/vim-atom-dark-modded-256'
+Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.6' }
 Plug 'kassio/neoterm'
+" Plug 'tomasr/molokai'
+" Plug 'chriskempson/base16-vim'
 
 Plug 'rizzatti/dash.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+
+Plug 'rking/ag.vim'
 
 "*****************************************************************************
 "" Custom bundles
@@ -64,6 +69,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'elixir-lang/vim-elixir'
 Plug 'carlosgaldino/elixir-snippets'
 Plug 'slashmili/alchemist.vim'
+Plug 'powerman/vim-plugin-AnsiEsc'
 
 
 " erlang
@@ -121,7 +127,7 @@ set shiftwidth=2
 set expandtab
 
 "" Map leader to ,
-let mapleader=','
+let g:mapleader=','
 
 "" Enable hidden buffers
 set hidden
@@ -131,6 +137,9 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+
+" Stop highlighting on Enter
+" map <CR> :noh<CR>
 
 "" Directories for swp files
 set nobackup
@@ -168,13 +177,17 @@ if !exists('g:not_finish_vimplug')
   syntax enable
 
   set background=dark
-  colorscheme atom-dark
+  colorscheme jellybeans
 endif
 
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
 set scrolloff=3
+
+" highlight cursor position
+set cursorline
+" set cursorcolumn
 
 " change cursor to bar in insert mode
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -186,6 +199,10 @@ let test#strategy = "neoterm"
 " ain't nobody got time for that
 tnoremap <Esc> <C-\><C-n>
 
+" Run Neomake when I save any buffer
+augroup localneomake
+   autocmd! BufWritePost * Neomake
+ augroup END
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 
@@ -383,6 +400,8 @@ let erlang_show_errors = 1
 " for html files, 2 spaces
 autocmd Filetype html setlocal ts=2 sw=2 sts=2 expandtab
 
+" golang
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
 " javascript
 let g:javascript_enable_domhtmlcss = 1
@@ -414,6 +433,12 @@ endif
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+
+" search
+set hlsearch
+set incsearch
+set ignorecase
+
 
 if !exists('g:airline_powerline_fonts')
   let g:airline#extensions#tabline#left_sep = ' '
