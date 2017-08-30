@@ -60,7 +60,7 @@ Plug 'rizzatti/dash.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 Plug 'rking/ag.vim'
-
+Plug 'jaawerth/nrun.vim'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -203,7 +203,12 @@ tnoremap <Esc> <C-\><C-n>
 augroup localneomake
    autocmd! BufWritePost * Neomake
  augroup END
+
 let g:neomake_javascript_enabled_makers = ['eslint']
+" when switching/opening a JS buffer, set neomake's eslint path, and enable it as a maker
+au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
+au BufWinEnter,BufWritePost * Neomake
+
 let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 
 " Neoterm
@@ -278,7 +283,8 @@ let g:NERDTreeShowIgnoredStatus=0
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 map <C-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Quit NERDTree if last buffer closed
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "*****************************************************************************
 "" Functions
