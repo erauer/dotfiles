@@ -273,13 +273,14 @@ let g:airline_skip_empty_sections = 1
 
 "" NERDTree configuration
 let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__','\.git']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeWinSize = 50
 " Git marker for nerdtree
 let g:NERDTreeShowIgnoredStatus=0
+let g:NERDTreeShowHidden=1
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 map <C-n> :NERDTreeToggle<CR>
@@ -401,6 +402,12 @@ nnoremap <C-p> :NERDTreeToggle<CR>
 let erlang_folding = 1
 let erlang_show_errors = 1
 
+let g:alchemist_iex_term_split = 'split'
+let g:alchemist#extended_autocomplete = 1
+
+"optional if you want to close the preview window automatically
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " html
 " for html files, 2 spaces
