@@ -88,6 +88,10 @@ Plug 'mattn/emmet-vim'
 "" Javascript Bundle
 Plug 'jelera/vim-javascript-syntax'
 
+" Fun
+" Plug 'joshhartigan/vim-reddit'
+" Plug 'ryanss/vim-hackernews'
+
 
 call plug#end()
 
