@@ -8,7 +8,7 @@ source $OMF_PATH/init.fish
 source ~/.asdf/asdf.fish
 
 set fish_greeting
-set fish_vi_key_bindings fzf_key_bindings
+set fish_key_bindings fish_vi_key_bindings
 
 set -gx LSCOLORS gxfxcxdxbxegedabagacad
 
