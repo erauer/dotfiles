@@ -2,12 +2,15 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/eric/.oh-my-zsh
+export ZSH=/home/eric/.oh-my-zsh
+
+# Would you like to use another custom folder than $ZSH/custom?
+ZSH_CUSTOM=$HOME/.config/zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="eden"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -51,8 +54,6 @@ ZSH_THEME="robbyrussell"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/home/eric/.config/zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -60,6 +61,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -92,7 +94,17 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias config='/usr/bin/git --git-dir=$HOME/.dotcfg/ --work-tree=$HOME $argv'
-source $HOME/.asdf/asdf.sh
-fpath=($HOME/.config/zsh/functions $fpath)
 
+
+# Autoload custom functions
+
+fpath=($HOME/.config/zsh/functions $fpath)
+fdir=$HOME/.config/zsh/functions
+for func in $fdir/[^_.]*(N.:t); do
+  autoload -Uz $func
+done
+unset fdir func
+
+source $HOME/.asdf/asdf.sh
+
+alias config='/usr/bin/git --git-dir=$HOME/.dotcfg/ --work-tree=$HOME $argv'
