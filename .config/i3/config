@@ -10,6 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $barcmd i3status
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -153,21 +154,10 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# i3status bar config
 bar {
-  status_command i3status
-	colors {
-        	background          $grey
-        	statusline          $mgrey
-		      separator	          $grey
-        	#separator           $lgrey
-		#		    border	background   text
-        	focused_workspace   $grey       $grey        $white
-        	active_workspace    $grey       $grey        $mgrey
-        	inactive_workspace  $grey       $grey        $mgrey
-        	urgent_workspace    $grey        $blue        $white
-    }
+	font pango:monospace 12
+	status_command i3status --config ~/.config/i3/status.conf
 }
 
 # spotify: hide
@@ -205,10 +195,8 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 
 exec setxkbmap -layout us -option caps:escape
 
-
-exec  xrandr --output DP1 --auto
-exec  xrandr --output eDP1 --mode 1920x1200 --scale 1x1 --right-of DP1
-# exec  xrandr --output DP1 --auto --right-of eDP1
+exec_always  xrandr --output DP1 --auto
+exec_always  xrandr --output eDP1 --mode 1920x1200 --scale 1x1 --right-of DP1
 
 # run the merge for good colors
 exec xrdb -merge $HOME/.Xresources
@@ -217,3 +205,4 @@ exec xrdb -merge $HOME/.Xdefaults1
 #Enpass
 exec /opt/Enpass/bin/runenpass.sh startWithTray
 
+exec_always feh --bg-scale /home/eric/Pictures/wallpaper.jpg

@@ -89,8 +89,8 @@ Plug 'mattn/emmet-vim'
 Plug 'jelera/vim-javascript-syntax'
 
 " Fun
-" Plug 'joshhartigan/vim-reddit'
-" Plug 'ryanss/vim-hackernews'
+Plug 'joshhartigan/vim-reddit'
+Plug 'ryanss/vim-hackernews'
 
 
 call plug#end()
@@ -100,6 +100,10 @@ let g:deoplete#disable_auto_complete = 1
 
 let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.13/bin/python'
 let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.5.2/bin/python3'
+
+
+
+
 
 " Required:
 filetype plugin indent on
