@@ -62,6 +62,7 @@ ZSH_THEME="eden"
 plugins=(
   git
   vi-mode
+  mix
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -108,3 +109,8 @@ unset fdir func
 source $HOME/.asdf/asdf.sh
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotcfg/ --work-tree=$HOME $argv'
+
+export GOPATH=~/Documents/projects/go
+
+export ERL_AFLAGS="-kernel shell_history enabled"
+export PATH=$GOPATH/bin:$GOPATH/bin/linux_amd64:$PATH
