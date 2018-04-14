@@ -98,7 +98,7 @@ call plug#end()
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#disable_auto_complete = 1
 
-let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.13/bin/python'
+let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.14/bin/python'
 let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.5.2/bin/python3'
 
 
@@ -221,7 +221,7 @@ let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 
 " Neoterm
 
-let g:neoterm_position = 'vertical'
+" let g:neoterm_position = 'vertical'
 let g:neoterm_automap_keys = ',tt'
 
 " Useful maps
