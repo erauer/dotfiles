@@ -115,3 +115,9 @@ export GOPATH=~/Documents/projects/go
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 export PATH=$GOPATH/bin:$GOPATH/bin/linux_amd64:$PATH
+
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
+# added by travis gem
+[ -f /home/eric/.travis/travis.sh ] && source /home/eric/.travis/travis.sh
