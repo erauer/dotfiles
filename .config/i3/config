@@ -9,7 +9,8 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
+#set $mod Mod1
 set $barcmd i3status
 
 set $base00 #101218
@@ -138,7 +139,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-workspace $ws1 output "DP-0"
+workspace $ws1 output "DP-1-1"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -252,9 +253,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 
 exec setxkbmap -layout us -option caps:escape
 
-#exec_always xrandr  --output DP-0  --primary --mode 3840x2160 --pos 3840x0 --rotate normal
-#exec_always xrandr --output eDP-1-1 --mode 3840x2160 --pos 0x0 --rotate normal --right-of DP-0
-#exec_always  xrandr --output eDP1 --mode 1920x1200 --scale 1x1 --right-of DP1
+exec $HOME/.config/i3/scripts/dual-displays.sh
 
 # run the merge for good colors
 exec xrdb -merge $HOME/.Xresources
