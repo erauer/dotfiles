@@ -121,3 +121,10 @@ alias pbpaste='xclip -selection clipboard -o'
 
 # added by travis gem
 [ -f /home/eric/.travis/travis.sh ] && source /home/eric/.travis/travis.sh
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh ]] && . /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh

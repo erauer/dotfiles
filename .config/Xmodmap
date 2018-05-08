@@ -1,5 +1,5 @@
 keycode 224 = XF86MonBrightnessDown
 keycode 115 = XF86AudioRaiseVolume
-keycode 78  = XF86AudioMut
+keycode 78  = XF86AudioMute
 clear Lock
-keycode 0x42 = Escapee
+keycode 0x42 = Escape

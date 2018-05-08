@@ -36,6 +36,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
+Plug 'sbdchd/neoformat'
 Plug 'benekastah/neomake'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -61,6 +62,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 Plug 'rking/ag.vim'
 Plug 'jaawerth/nrun.vim'
+
+Plug 'mhartington/nvim-typescript'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -88,10 +91,6 @@ Plug 'mattn/emmet-vim'
 "" Javascript Bundle
 Plug 'jelera/vim-javascript-syntax'
 
-" Fun
-Plug 'joshhartigan/vim-reddit'
-Plug 'ryanss/vim-hackernews'
-
 
 call plug#end()
 
@@ -102,7 +101,10 @@ let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.14/bin/python'
 let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.5.2/bin/python3'
 
 
-
+augroup NeoformatAutoFormat
+  autocmd!
+  autocmd BufWritePre *.{js,jsx,css,scss,json,ex,exs,rb,rabl,rake} Neoformat
+augroup END
 
 
 " Required:
@@ -213,8 +215,10 @@ augroup localneomake
  augroup END
 
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_typescript_enabled_makers = ['tslint']
 " when switching/opening a JS buffer, set neomake's eslint path, and enable it as a maker
 au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
+au BufEnter *.ts let b:neomake_typescript_tslint_exe = nrun#Which('tslint')
 au BufWinEnter,BufWritePost * Neomake
 
 let g:neomake_elixir_enabled_makers = ['mix', 'credo']
@@ -357,6 +361,7 @@ let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list=1
 let g:syntastic_aggregate_errors = 1
+let g:syntastic_typescript_checkers = ['tslint']
 
 " Disable mouse click to go to position
 set mouse-=a
