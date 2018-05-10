@@ -214,8 +214,6 @@ bar {
 # spotify: hide
 for_window [class="^Spotify$"] move container to scratchpad
 
-# move all floating windows to the scratchpad
-bindsym $mod+Shift+minus [floating] move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
