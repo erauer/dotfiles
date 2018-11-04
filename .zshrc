@@ -63,6 +63,7 @@ plugins=(
   git
   vi-mode
   mix
+  wd
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -128,3 +129,10 @@ alias pbpaste='xclip -selection clipboard -o'
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh ]] && . /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh
+
+. /etc/profile.d/vte-2.91.sh
+
+export PATH=$PATH:$HOME/bin
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

@@ -91,6 +91,8 @@ Plug 'mattn/emmet-vim'
 "" Javascript Bundle
 Plug 'jelera/vim-javascript-syntax'
 
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
@@ -100,10 +102,13 @@ let g:deoplete#disable_auto_complete = 1
 let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.14/bin/python'
 let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.5.2/bin/python3'
 
+let g:go_addtags_transform = "snakecase"
+let g:go_version_warning = 0
+let g:go_fmt_command = "gofmt"
 
 augroup NeoformatAutoFormat
   autocmd!
-  autocmd BufWritePre *.{js,jsx,css,scss,json,ex,exs,rb,rabl,rake} Neoformat
+  autocmd BufWritePre *.{js,jsx,css,scss,ex,exs,rb,rabl,rake,html,json,yaml,erb,rb} Neoformat
 augroup END
 
 
