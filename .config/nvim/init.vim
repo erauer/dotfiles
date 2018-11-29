@@ -36,11 +36,11 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
+Plug 'sbdchd/neoformat'
 Plug 'benekastah/neomake'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
-Plug 'sheerun/vim-polyglot'
 
 "" Vim-Session
 Plug 'xolox/vim-misc'
@@ -61,6 +61,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 Plug 'rking/ag.vim'
 Plug 'jaawerth/nrun.vim'
+
+Plug 'mhartington/nvim-typescript'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -83,26 +85,36 @@ Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 
+" PlantUML
+
+Plug 'scrooloose/vim-slumlord'
 
 " javascript
 "" Javascript Bundle
 Plug 'jelera/vim-javascript-syntax'
 
-" Fun
-Plug 'joshhartigan/vim-reddit'
-Plug 'ryanss/vim-hackernews'
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
+let g:polyglot_disabled = ['go']
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#disable_auto_complete = 1
 
-let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.13/bin/python'
-let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.5.2/bin/python3'
+let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.15/bin/python'
+let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.5.6/bin/python3'
+
+let g:go_addtags_transform = "snakecase"
+let g:go_version_warning = 0
+let g:go_fmt_command = "gofmt"
 
 
-
+augroup NeoformatAutoFormat
+  autocmd!
+  autocmd BufWritePre *.{js,jsx,css,scss,ex,exs,rb,rabl,rake,html,json,yaml,erb,rb} Neoformat
+augroup END
 
 
 " Required:
@@ -213,15 +225,17 @@ augroup localneomake
  augroup END
 
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_typescript_enabled_makers = ['tslint']
 " when switching/opening a JS buffer, set neomake's eslint path, and enable it as a maker
 au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
+au BufEnter *.ts let b:neomake_typescript_tslint_exe = nrun#Which('tslint')
 au BufWinEnter,BufWritePost * Neomake
 
 let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 
 " Neoterm
 
-let g:neoterm_position = 'vertical'
+" let g:neoterm_position = 'vertical'
 let g:neoterm_automap_keys = ',tt'
 
 " Useful maps
@@ -357,6 +371,7 @@ let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list=1
 let g:syntastic_aggregate_errors = 1
+let g:syntastic_typescript_checkers = ['tslint']
 
 " Disable mouse click to go to position
 set mouse-=a

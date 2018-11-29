@@ -63,6 +63,7 @@ plugins=(
   git
   vi-mode
   mix
+  wd
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -115,3 +116,23 @@ export GOPATH=~/Documents/projects/go
 
 export ERL_AFLAGS="-kernel shell_history enabled"
 export PATH=$GOPATH/bin:$GOPATH/bin/linux_amd64:$PATH
+
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
+# added by travis gem
+[ -f /home/eric/.travis/travis.sh ] && source /home/eric/.travis/travis.sh
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh ]] && . /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh
+
+. /etc/profile.d/vte-2.91.sh
+
+export PATH=$PATH:$HOME/bin
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
