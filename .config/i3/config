@@ -139,7 +139,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-workspace $ws1 output "DP-1-1"
+workspace $ws1 output "DP-3"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -261,7 +261,7 @@ exec xrdb -merge $HOME/.Xdefaults
 exec  xmodmap ~/.config/Xmodmap
 
 #Enpass
-exec --no-startup-id /opt/Enpass/bin/runenpass.sh startWithTray
+exec --no-startup-id /opt/Enpass/runenpass.sh startWithTray
 
 exec --no-startup-id nm-applet
 exec_always feh --bg-scale /home/eric/Pictures/wallpaper.jpg

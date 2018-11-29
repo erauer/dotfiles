@@ -41,7 +41,6 @@ Plug 'benekastah/neomake'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
-Plug 'sheerun/vim-polyglot'
 
 "" Vim-Session
 Plug 'xolox/vim-misc'
@@ -86,6 +85,9 @@ Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 
+" PlantUML
+
+Plug 'scrooloose/vim-slumlord'
 
 " javascript
 "" Javascript Bundle
@@ -94,17 +96,20 @@ Plug 'jelera/vim-javascript-syntax'
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
+let g:polyglot_disabled = ['go']
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#disable_auto_complete = 1
 
-let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.14/bin/python'
-let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.5.2/bin/python3'
+let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.15/bin/python'
+let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.5.6/bin/python3'
 
 let g:go_addtags_transform = "snakecase"
 let g:go_version_warning = 0
 let g:go_fmt_command = "gofmt"
+
 
 augroup NeoformatAutoFormat
   autocmd!
