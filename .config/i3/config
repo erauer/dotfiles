@@ -247,8 +247,8 @@ exec --no-startup-id spotify
 exec --no-startup-id clipit
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec  brightnessctl set 10%+# increase screen brightness
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brightness
 
 exec setxkbmap -layout us -option caps:escape
 
