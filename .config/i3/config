@@ -117,6 +117,9 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+#Toggle Caps_Lock
+bindsym Control+Escape exec xdotool key Caps_Lock
+
 set $displayMode "Set display mode [d]ual [l]aptop"
 bindsym $mod+Shift+i mode $displayMode
 mode $displayMode {
@@ -219,8 +222,7 @@ for_window [class="^Spotify$"] move container to scratchpad
 bindsym $mod+z scratchpad show
 
 for_window [class="Slack"] move container to workspace $ws4
-
-for_window [class="Enpass"] move container to workspace $ws7
+for_window [title="^Enpass$"] move container to workspace $ws7
 #for_window [class="google-chrome"] floating enable
 #for_window [class="Google-chrome"] floating enable
 
@@ -243,7 +245,7 @@ bindsym XF86AudioStop exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 
-exec --no-startup-id spotify
+#exec --no-startup-id spotify
 exec --no-startup-id clipit
 
 # Sreen brightness controls
@@ -261,8 +263,9 @@ exec xrdb -merge $HOME/.Xdefaults
 exec  xmodmap ~/.config/Xmodmap
 
 #Enpass
-exec --no-startup-id /opt/Enpass/runenpass.sh startWithTray
+exec --no-startup-id /opt/enpass/Enpass startWithTray
 
 exec --no-startup-id nm-applet
 exec_always feh --bg-scale /home/eric/Pictures/wallpaper.jpg
+exec_always xmodmap ~/.config/Xmodmap
 exec compton

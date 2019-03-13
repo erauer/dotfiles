@@ -37,7 +37,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
 Plug 'sbdchd/neoformat'
-Plug 'benekastah/neomake'
+" Plug 'benekastah/neomake'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
@@ -58,6 +58,9 @@ Plug 'kassio/neoterm'
 
 Plug 'rizzatti/dash.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+" Plug 'zchee/deoplete-go', { 'do': 'make'}
+"
+Plug 'w0rp/ale'
 
 Plug 'rking/ag.vim'
 Plug 'jaawerth/nrun.vim'
@@ -115,6 +118,21 @@ augroup NeoformatAutoFormat
   autocmd!
   autocmd BufWritePre *.{js,jsx,css,scss,ex,exs,rb,rabl,rake,html,json,yaml,erb,rb} Neoformat
 augroup END
+
+" explicit TAB for deoplete
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
+""use TAB as the mapping
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ?  "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ deoplete#mappings#manual_complete()
+
+inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
+inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 
 
 " Required:
@@ -220,18 +238,18 @@ let test#strategy = "neoterm"
 tnoremap <Esc> <C-\><C-n>
 
 " Run Neomake when I save any buffer
-augroup localneomake
-   autocmd! BufWritePost * Neomake
- augroup END
+" augroup localneomake
+"   autocmd! BufWritePost * Neomake
+" augroup END
 
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_typescript_enabled_makers = ['tslint']
+" let g:neomake_javascript_enabled_makers = ['eslint']
+" let g:neomake_typescript_enabled_makers = ['tslint']
 " when switching/opening a JS buffer, set neomake's eslint path, and enable it as a maker
-au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
-au BufEnter *.ts let b:neomake_typescript_tslint_exe = nrun#Which('tslint')
-au BufWinEnter,BufWritePost * Neomake
+" au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
+" au BufEnter *.ts let b:neomake_typescript_tslint_exe = nrun#Which('tslint')
+" au BufWinEnter,BufWritePost * Neomake
 
-let g:neomake_elixir_enabled_makers = ['mix', 'credo']
+" let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 
 " Neoterm
 
@@ -262,11 +280,12 @@ set encoding=utf-8
 
 
 " Check syntax with neomake when writing file
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
 "" Status bar
 
 " Don't tell me to use smartquotes in markdown ok?
-let g:neomake_markdown_enabled_makers = []
+" let g:neomake_markdown_enabled_makers = []
+
 
 set laststatus=2
 
@@ -417,6 +436,9 @@ nnoremap <C-p> :NERDTreeToggle<CR>
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
+
+
+" set foldmethod=indent
 
 " elixir
 
