@@ -110,7 +110,7 @@ unset fdir func
 
 source $HOME/.asdf/asdf.sh
 
-alias config='/usr/bin/git --git-dir=$HOME/.dotcfg/ --work-tree=$HOME $argv'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv'
 
 export GOPATH=~/Documents/projects/go
 
