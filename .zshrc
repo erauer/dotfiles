@@ -138,3 +138,5 @@ export PATH=$PATH:$HOME/bin
 export PATH="$PATH:$HOME/.rvm/bin"
 
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+
+eval $(hub alias -s)
