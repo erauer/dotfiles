@@ -10,7 +10,7 @@ ZSH_CUSTOM=$HOME/.config/zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="eden"
+ZSH_THEME="edvardm"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -130,7 +130,7 @@ alias pbpaste='xclip -selection clipboard -o'
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh ]] && . /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh
 
-. /etc/profile.d/vte-2.91.sh
+. /etc/profile.d/vte.sh
 
 export PATH=$PATH:$HOME/bin
 
