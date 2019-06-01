@@ -17,3 +17,4 @@ events:~/Documents/projects/ly10/ly10-iot-events
 enroll:~/Documents/projects/ly10/ly10-plt-enroll
 provision:~/Documents/projects/ly10/ly10-plt-provision
 lint:~/Documents/projects/ly10/ly10-lint
+ssh:~/Documents/projects/ly10/ly10-init-ssh

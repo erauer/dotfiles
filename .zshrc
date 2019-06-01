@@ -130,7 +130,9 @@ alias pbpaste='xclip -selection clipboard -o'
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh ]] && . /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh
 
-. /etc/profile.d/vte.sh
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
 
 export PATH=$PATH:$HOME/bin
 

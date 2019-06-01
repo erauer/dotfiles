@@ -230,7 +230,7 @@ for_window [title="^Enpass$"] move container to workspace $ws7
 bindsym $mod+Shift+x exec i3lock
 
 # Keyboard backlight
-exec msiklm off
+exec --no-startup-id msiklm off
 bindsym $mod+Shift+b exec msiklm white low
 bindsym $mod+Shift+o exec msiklm off
 
@@ -252,20 +252,21 @@ exec --no-startup-id clipit
 bindsym XF86MonBrightnessUp exec  brightnessctl set 10%+# increase screen brightness
 bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brightness
 
-exec setxkbmap -layout us -option caps:escape
+exec --no-startup-id setxkbmap -layout us -option caps:escape
 
-exec $HOME/.config/i3/scripts/dual-displays.sh
+exec --no-startup-id $HOME/.config/i3/scripts/dual-displays.sh
 
 # run the merge for good colors
-exec xrdb -merge $HOME/.Xresources
-exec xrdb -merge $HOME/.Xdefaults
+exec --no-startup-id xrdb -merge $HOME/.Xresources
+exec --no-startup-id xrdb -merge $HOME/.Xdefaults
 
-exec  xmodmap ~/.config/Xmodmap
+exec  --no-startup-id xmodmap ~/.config/Xmodmap
 
 #Enpass
 exec --no-startup-id /opt/enpass/Enpass startWithTray
 
 exec --no-startup-id nm-applet
-exec_always feh --bg-scale /home/eric/Pictures/wallpaper.jpg
-exec_always xmodmap ~/.config/Xmodmap
-exec compton
+exec_always --no-startup-id feh --bg-scale /home/eric/Pictures/wallpaper.jpg
+exec_always --no-startup-id xmodmap ~/.config/Xmodmap
+exec --no-startup-id compton
+exec_always --no-startup-id numlockx off

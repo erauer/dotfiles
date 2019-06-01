@@ -66,6 +66,8 @@ Plug 'rking/ag.vim'
 Plug 'jaawerth/nrun.vim'
 
 Plug 'mhartington/nvim-typescript'
+
+Plug 'lambdalisue/suda.vim'
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -185,6 +187,7 @@ set noswapfile
 
 set fileformats=unix,dos,mac
 set showcmd
+set inccommand=nosplit
 
 if exists('$SHELL')
     set shell=$SHELL
@@ -192,6 +195,7 @@ else
     set shell=/bin/sh
 endif
 
+set clipboard=unnamedplus
 " session management
 let g:session_directory = "~/.config/nvim/session"
 let g:session_autoload = "no"
@@ -412,7 +416,6 @@ if has('macunix')
   vmap <C-c> :w !pbcopy<CR><CR>
 endif
 
-set clipboard=unnamedplus
 
 "" Close buffer
 noremap <leader>c :bd<CR>
