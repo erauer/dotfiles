@@ -115,7 +115,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv'
 export GOPATH=~/Documents/projects/go
 
 export ERL_AFLAGS="-kernel shell_history enabled"
-export PATH=$GOPATH/bin:$GOPATH/bin/linux_amd64:$PATH
+export PATH=$GOPATH/bin:$GOPATH/bin/linux_amd64:$HOME/.local/bin:$PATH
 
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
