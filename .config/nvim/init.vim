@@ -27,14 +27,16 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 "" Plug install packages
 "*****************************************************************************
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'scrooloose/nerdtree'
+" Plug 'jistr/vim-nerdtree-tabs'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-vinegar'
+
 
 Plug 'sbdchd/neoformat'
 " Plug 'benekastah/neomake'
@@ -68,6 +70,11 @@ Plug 'jaawerth/nrun.vim'
 Plug 'mhartington/nvim-typescript'
 
 Plug 'lambdalisue/suda.vim'
+
+" Fzf
+Plug '/usr/bin/fzf'
+Plug 'junegunn/fzf.vim'
+
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -106,7 +113,8 @@ call plug#end()
 
 let g:polyglot_disabled = ['go']
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 1
+let g:deoplete#disable_auto_complete = 0
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.15/bin/python'
 let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.6.8/bin/python3'
@@ -317,18 +325,18 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
 
 "" NERDTree configuration
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__','\.git']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeShowBookmarks=1
-let g:nerdtree_tabs_focus_on_files=1
-let g:NERDTreeWinSize = 50
+" let g:NERDTreeChDirMode=2
+" let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__','\.git']
+" let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+" let g:NERDTreeShowBookmarks=1
+" let g:nerdtree_tabs_focus_on_files=1
+" let g:NERDTreeWinSize = 50
 " Git marker for nerdtree
-let g:NERDTreeShowIgnoredStatus=0
-let g:NERDTreeShowHidden=1
+" let g:NERDTreeShowIgnoredStatus=0
+" let g:NERDTreeShowHidden=1
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-map <C-n> :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
 " Quit NERDTree if last buffer closed
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -378,6 +386,9 @@ set autoread
 "*****************************************************************************
 
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap - :Explore<CR>
+" nnoremap <Leader>f :Explore <C-r>=getcwd()<CR><CR>
+nnoremap <Leader>f :Explore .<CR>
 
 
 " snippets
@@ -402,6 +413,10 @@ set mouse-=a
 " Tagbar
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
+
+" netrw
+let g:netrw_liststyle = 3
+
 
 " Disable visualbell
 set noerrorbells visualbell t_vb=
@@ -434,7 +449,9 @@ vmap > >gv
 nnoremap <Leader>o :.Gbrowse<CR>
 
 " NERDTree shortcuts
-nnoremap <C-p> :NERDTreeToggle<CR>
+" nnoremap <C-p> :NERDTreeToggle<CR>
+"
+nnoremap <C-p> :Files<Cr>
 
 "*****************************************************************************
 "" Custom configs
