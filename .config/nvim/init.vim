@@ -27,17 +27,19 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 "" Plug install packages
 "*****************************************************************************
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'scrooloose/nerdtree'
+" Plug 'jistr/vim-nerdtree-tabs'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-vinegar'
+
 
 Plug 'sbdchd/neoformat'
-Plug 'benekastah/neomake'
+" Plug 'benekastah/neomake'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
@@ -56,13 +58,23 @@ Plug 'kassio/neoterm'
 " Plug 'tomasr/molokai'
 " Plug 'chriskempson/base16-vim'
 
-Plug 'rizzatti/dash.vim'
+" Plug 'rizzatti/dash.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+" Plug 'zchee/deoplete-go', { 'do': 'make'}
+"
+Plug 'w0rp/ale'
 
 Plug 'rking/ag.vim'
 Plug 'jaawerth/nrun.vim'
 
 Plug 'mhartington/nvim-typescript'
+
+Plug 'lambdalisue/suda.vim'
+
+" Fzf
+Plug '/usr/bin/fzf'
+Plug 'junegunn/fzf.vim'
+
 "*****************************************************************************
 "" Custom bundles
 "*****************************************************************************
@@ -101,20 +113,38 @@ call plug#end()
 
 let g:polyglot_disabled = ['go']
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#disable_auto_complete = 1
+let g:deoplete#disable_auto_complete = 0
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.15/bin/python'
-let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.5.6/bin/python3'
+let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.6.8/bin/python3'
 
 let g:go_addtags_transform = "snakecase"
 let g:go_version_warning = 0
 let g:go_fmt_command = "gofmt"
+let g:go_auto_type_info = 0
+let g:go_build_tags = "prod"
 
 
 augroup NeoformatAutoFormat
   autocmd!
   autocmd BufWritePre *.{js,jsx,css,scss,ex,exs,rb,rabl,rake,html,json,yaml,erb,rb} Neoformat
 augroup END
+
+" explicit TAB for deoplete
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
+""use TAB as the mapping
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ?  "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ deoplete#mappings#manual_complete()
+
+inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
+inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 
 
 " Required:
@@ -167,6 +197,7 @@ set noswapfile
 
 set fileformats=unix,dos,mac
 set showcmd
+set inccommand=nosplit
 
 if exists('$SHELL')
     set shell=$SHELL
@@ -174,6 +205,7 @@ else
     set shell=/bin/sh
 endif
 
+set clipboard=unnamedplus
 " session management
 let g:session_directory = "~/.config/nvim/session"
 let g:session_autoload = "no"
@@ -220,18 +252,18 @@ let test#strategy = "neoterm"
 tnoremap <Esc> <C-\><C-n>
 
 " Run Neomake when I save any buffer
-augroup localneomake
-   autocmd! BufWritePost * Neomake
- augroup END
+" augroup localneomake
+"   autocmd! BufWritePost * Neomake
+" augroup END
 
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_typescript_enabled_makers = ['tslint']
+" let g:neomake_javascript_enabled_makers = ['eslint']
+" let g:neomake_typescript_enabled_makers = ['tslint']
 " when switching/opening a JS buffer, set neomake's eslint path, and enable it as a maker
-au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
-au BufEnter *.ts let b:neomake_typescript_tslint_exe = nrun#Which('tslint')
-au BufWinEnter,BufWritePost * Neomake
+" au BufEnter *.js let b:neomake_javascript_eslint_exe = nrun#Which('eslint')
+" au BufEnter *.ts let b:neomake_typescript_tslint_exe = nrun#Which('tslint')
+" au BufWinEnter,BufWritePost * Neomake
 
-let g:neomake_elixir_enabled_makers = ['mix', 'credo']
+" let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 
 " Neoterm
 
@@ -262,11 +294,12 @@ set encoding=utf-8
 
 
 " Check syntax with neomake when writing file
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
 "" Status bar
 
 " Don't tell me to use smartquotes in markdown ok?
-let g:neomake_markdown_enabled_makers = []
+" let g:neomake_markdown_enabled_makers = []
+
 
 set laststatus=2
 
@@ -294,18 +327,18 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline_skip_empty_sections = 1
 
 "" NERDTree configuration
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__','\.git']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeShowBookmarks=1
-let g:nerdtree_tabs_focus_on_files=1
-let g:NERDTreeWinSize = 50
+" let g:NERDTreeChDirMode=2
+" let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__','\.git']
+" let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+" let g:NERDTreeShowBookmarks=1
+" let g:nerdtree_tabs_focus_on_files=1
+" let g:NERDTreeWinSize = 50
 " Git marker for nerdtree
-let g:NERDTreeShowIgnoredStatus=0
-let g:NERDTreeShowHidden=1
+" let g:NERDTreeShowIgnoredStatus=0
+" let g:NERDTreeShowHidden=1
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-map <C-n> :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
 " Quit NERDTree if last buffer closed
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -355,6 +388,9 @@ set autoread
 "*****************************************************************************
 
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap - :Explore<CR>
+" nnoremap <Leader>f :Explore <C-r>=getcwd()<CR><CR>
+nnoremap <Leader>f :Explore .<CR>
 
 
 " snippets
@@ -380,6 +416,11 @@ set mouse-=a
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
+" netrw
+let g:netrw_liststyle = 3
+autocmd FileType netrw setl bufhidden=delete
+
+
 " Disable visualbell
 set noerrorbells visualbell t_vb=
 if has('autocmd')
@@ -393,7 +434,6 @@ if has('macunix')
   vmap <C-c> :w !pbcopy<CR><CR>
 endif
 
-set clipboard=unnamedplus
 
 "" Close buffer
 noremap <leader>c :bd<CR>
@@ -412,11 +452,16 @@ vmap > >gv
 nnoremap <Leader>o :.Gbrowse<CR>
 
 " NERDTree shortcuts
-nnoremap <C-p> :NERDTreeToggle<CR>
+" nnoremap <C-p> :NERDTreeToggle<CR>
+"
+nnoremap <C-p> :Files<Cr>
 
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
+
+
+" set foldmethod=indent
 
 " elixir
 
