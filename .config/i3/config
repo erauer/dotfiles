@@ -231,7 +231,7 @@ for_window [title="^Enpass$"] move container to workspace $ws7
 #for_window [class="Google-chrome"] floating enable
 
 #Lock
-bindsym $mod+Shift+x exec i3lock
+bindsym $mod+Shift+x exec i3lock -f -c 333333
 
 # Keyboard backlight
 exec --no-startup-id msiklm off
