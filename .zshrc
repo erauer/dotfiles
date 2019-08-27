@@ -10,7 +10,7 @@ ZSH_CUSTOM=$HOME/.config/zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="eden"
+ZSH_THEME="edvardm"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -110,15 +110,19 @@ unset fdir func
 
 source $HOME/.asdf/asdf.sh
 
-alias config='/usr/bin/git --git-dir=$HOME/.dotcfg/ --work-tree=$HOME $argv'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv'
 
 export GOPATH=~/Documents/projects/go
 
 export ERL_AFLAGS="-kernel shell_history enabled"
-export PATH=$GOPATH/bin:$GOPATH/bin/linux_amd64:$PATH
+export PATH=$GOPATH/bin:$GOPATH/bin/linux_amd64:$HOME/.local/bin:$PATH
+
+export GIT_AUTO_FETCH_INTERVAL=86400
 
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias auth='ykman oath code "$(ykman oath list | fzf)"'
+alias wdd='wd "$(wd list | fzf | awk '\''{print $1}'\'')"'
 
 # added by travis gem
 [ -f /home/eric/.travis/travis.sh ] && source /home/eric/.travis/travis.sh
@@ -130,9 +134,15 @@ alias pbpaste='xclip -selection clipboard -o'
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh ]] && . /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh
 
-. /etc/profile.d/vte-2.91.sh
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
 
 export PATH=$PATH:$HOME/bin
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+
+eval $(hub alias -s)
