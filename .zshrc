@@ -145,4 +145,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
+eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
+export SSH_AUTH_SOCK
+
 eval $(hub alias -s)

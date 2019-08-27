@@ -33,6 +33,7 @@ function aws-creds () {
     fi
 
     local rv creds_json
+    echo "aws --output json sts get-session-token --duration-seconds 86400 --serial-number "arn:aws:iam::$aws_account:mfa/$iam_user" --token-code $@ --profile bcd"
     creds_json=$(aws --output json sts get-session-token --duration-seconds 86400 --serial-number "arn:aws:iam::$aws_account:mfa/$iam_user" --token-code $@ --profile bcd)
     rv="$?"
     if [[ $rv -ne 0 || ! $creds_json ]]; then
