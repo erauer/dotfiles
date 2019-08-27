@@ -58,7 +58,7 @@ Plug 'kassio/neoterm'
 " Plug 'tomasr/molokai'
 " Plug 'chriskempson/base16-vim'
 
-Plug 'rizzatti/dash.vim'
+" Plug 'rizzatti/dash.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " Plug 'zchee/deoplete-go', { 'do': 'make'}
 "
@@ -122,6 +122,8 @@ let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.6.8/bin/python3'
 let g:go_addtags_transform = "snakecase"
 let g:go_version_warning = 0
 let g:go_fmt_command = "gofmt"
+let g:go_auto_type_info = 0
+let g:go_build_tags = "prod"
 
 
 augroup NeoformatAutoFormat
@@ -416,6 +418,7 @@ let g:tagbar_autofocus = 1
 
 " netrw
 let g:netrw_liststyle = 3
+autocmd FileType netrw setl bufhidden=delete
 
 
 " Disable visualbell
