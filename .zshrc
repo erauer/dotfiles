@@ -117,8 +117,12 @@ export GOPATH=~/Documents/projects/go
 export ERL_AFLAGS="-kernel shell_history enabled"
 export PATH=$GOPATH/bin:$GOPATH/bin/linux_amd64:$HOME/.local/bin:$PATH
 
+export GIT_AUTO_FETCH_INTERVAL=86400
+
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias auth='ykman oath code "$(ykman oath list | fzf)"'
+alias wdd='wd "$(wd list | fzf | awk '\''{print $1}'\'')"'
 
 # added by travis gem
 [ -f /home/eric/.travis/travis.sh ] && source /home/eric/.travis/travis.sh
