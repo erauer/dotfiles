@@ -123,7 +123,7 @@ let g:go_addtags_transform = "snakecase"
 let g:go_version_warning = 0
 let g:go_fmt_command = "gofmt"
 let g:go_auto_type_info = 0
-let g:go_build_tags = "prod"
+" #let g:go_build_tags = prod"
 
 
 augroup NeoformatAutoFormat
@@ -551,3 +551,4 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+

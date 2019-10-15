@@ -98,6 +98,9 @@ export EDITOR='nvim'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
 
 # Autoload custom functions
 
@@ -134,9 +137,6 @@ alias wdd='wd "$(wd list | fzf | awk '\''{print $1}'\'')"'
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh ]] && . /home/eric/Documents/projects/sc01/sc01-plt-api/node_modules/tabtab/.completions/sls.zsh
 
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
-fi
 
 export PATH=$PATH:$HOME/bin
 
@@ -148,4 +148,5 @@ export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
 export SSH_AUTH_SOCK
 
+alias status="echo $?"
 eval $(hub alias -s)
