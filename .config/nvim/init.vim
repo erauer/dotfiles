@@ -416,6 +416,10 @@ set mouse-=a
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
+" turn to next or previous errors, after open location list
+nmap <leader>j :lnext<CR>
+nmap <leader>k :lprevious<CR>
+
 " netrw
 let g:netrw_liststyle = 3
 autocmd FileType netrw setl bufhidden=delete
