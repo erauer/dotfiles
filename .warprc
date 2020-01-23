@@ -20,3 +20,8 @@ lint:~/Documents/projects/ly10/ly10-lint
 ssh:~/Documents/projects/ly10/ly10-init-ssh
 auth:~/Documents/projects/ly10/ly10-plt-auth
 auth0:~/Documents/projects/ly10/auth0
+upload:~/Documents/projects/ly10/ly10-release-upload
+archive:~/Documents/projects/ly10/ly10-archiver
+nerves-hub:~/Documents/projects/nerves-hub
+counter:~/Documents/home/projects/counter
+zephyr:~/Documents/projects/ly10/ly10-zephyr-fw

@@ -273,3 +273,12 @@ exec_always --no-startup-id feh --bg-scale /home/eric/Pictures/wallpaper.jpg
 exec_always --no-startup-id xmodmap ~/.config/Xmodmap
 exec --no-startup-id compton
 exec_always --no-startup-id numlockx
+
+# Screenshots	# Screenshots
+# Screenshot fullscreen	# Screenshot fullscreen
+bindsym Print exec "scrot -q 100 ${HOME}'/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png'"
+# Screenshot with selection	# Screenshot with selection
+bindsym $mod+Print exec "sleep 0.2; scrot -q 100 -s ${HOME}'/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png'"
+
+# Screenshot current focused window	# Screenshot current focused window
+bindsym Shift+Print exec "scrot -q 100 -u ${HOME}'/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png'"

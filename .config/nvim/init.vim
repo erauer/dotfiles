@@ -123,7 +123,7 @@ let g:go_addtags_transform = "snakecase"
 let g:go_version_warning = 0
 let g:go_fmt_command = "gofmt"
 let g:go_auto_type_info = 0
-let g:go_build_tags = "prod"
+" #let g:go_build_tags = prod"
 
 
 augroup NeoformatAutoFormat
@@ -416,6 +416,10 @@ set mouse-=a
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
+" turn to next or previous errors, after open location list
+nmap <leader>j :lnext<CR>
+nmap <leader>k :lprevious<CR>
+
 " netrw
 let g:netrw_liststyle = 3
 autocmd FileType netrw setl bufhidden=delete
@@ -551,3 +555,4 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+
