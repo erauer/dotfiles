@@ -239,9 +239,9 @@ bindsym $mod+Shift+b exec msiklm white low
 bindsym $mod+Shift+o exec msiklm off
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
 # controls for Spotify
 bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
@@ -273,6 +273,10 @@ exec_always --no-startup-id feh --bg-scale /home/eric/Pictures/wallpaper.jpg
 exec_always --no-startup-id xmodmap ~/.config/Xmodmap
 exec --no-startup-id compton
 exec_always --no-startup-id numlockx
+
+# autostart redshift
+exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+exec --no-startup-id redshift-gtk
 
 # Screenshots	# Screenshots
 # Screenshot fullscreen	# Screenshot fullscreen
