@@ -36,6 +36,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-endwise'
 
 
 Plug 'sbdchd/neoformat'
@@ -122,9 +123,9 @@ let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.6.8/bin/python3'
 let g:go_addtags_transform = "snakecase"
 let g:go_version_warning = 0
 let g:go_fmt_command = "gofmt"
-let g:go_auto_type_info = 0
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
 " #let g:go_build_tags = prod"
-
 
 augroup NeoformatAutoFormat
   autocmd!
