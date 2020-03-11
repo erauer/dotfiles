@@ -70,10 +70,16 @@ bindsym $mod+Tab exec rofi -show window -lines 5 -eh 2 -width 100 -padding 500 -
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+#bindsym $mod+h focus left
+#bindsym $mod+j focus down
+#bindsym $mod+k focus up
+#bindsym $mod+l focus right
+
+bindsym --release  $mod+h exec "/home/eric/bin/i3-vim-focus left"
+bindsym  --release  $mod+j exec "/home/eric/bin/i3-vim-focus down"
+bindsym  --release  $mod+k exec "/home/eric/bin/i3-vim-focus  up"
+bindsym  --release  $mod+l exec "/home/eric/bin/i3-vim-focus right"
+
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -122,12 +128,12 @@ bindsym $mod+a focus parent
 #Toggle Caps_Lock
 bindsym Control+Escape exec xdotool key Caps_Lock
 
-set $displayMode "Set display mode [d]ual [l]aptop"
+set $displayMode "Set display mode [d]ual [l]aptop [h]ome"
 bindsym $mod+Shift+i mode $displayMode
 mode $displayMode {
     bindsym d exec "~/.config/i3/scripts/dual-displays.sh"
-
     bindsym l exec "~/.config/i3/scripts/laptop-display.sh"
+    bindsym h exec "~/.config/i3/scripts/home.sh"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"

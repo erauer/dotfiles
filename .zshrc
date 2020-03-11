@@ -158,3 +158,5 @@ if [ -f '/home/eric/Documents/tools/google-cloud-sdk/path.zsh.inc' ]; then . '/h
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/eric/Documents/tools/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/eric/Documents/tools/google-cloud-sdk/completion.zsh.inc'; fi
+
+export SAM_CLI_TELEMETRY=0

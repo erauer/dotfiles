@@ -54,7 +54,7 @@ Plug 'honza/vim-snippets'
 "" Color
 Plug 'mhartington/oceanic-next'
 Plug 'gh123man/vim-atom-dark-modded-256'
-Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.6' }
+Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.7' }
 Plug 'kassio/neoterm'
 " Plug 'tomasr/molokai'
 " Plug 'chriskempson/base16-vim'
@@ -75,6 +75,8 @@ Plug 'lambdalisue/suda.vim'
 " Fzf
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
+
+Plug 'jwilm/i3-vim-focus'
 
 "*****************************************************************************
 "" Custom bundles
@@ -206,6 +208,7 @@ else
     set shell=/bin/sh
 endif
 
+
 set clipboard=unnamedplus
 " session management
 let g:session_directory = "~/.config/nvim/session"
@@ -219,6 +222,7 @@ let g:session_command_aliases = 1
 syntax on
 set ruler
 set number
+
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
@@ -311,7 +315,7 @@ set modelines=10
 " Set the title of the iterm tab
 set title
 set titleold="Terminal"
-set titlestring=%F
+set titlestring=%F\ NVIM
 
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
@@ -392,7 +396,8 @@ noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap - :Explore<CR>
 " nnoremap <Leader>f :Explore <C-r>=getcwd()<CR><CR>
 nnoremap <Leader>f :Explore .<CR>
-
+nnoremap <leader>aj :ALENext<cr>
+nnoremap <silent> <leader>ak :ALEPrevious<cr>
 
 " snippets
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -556,4 +561,10 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+
+"  i3 vim focus
+map gwl :call Focus('right', 'l')<CR>
+map gwh :call Focus('left', 'h')<CR>
+map gwk :call Focus('up', 'k')<CR>
+map gwj :call Focus('down', 'j')<CR>
 
