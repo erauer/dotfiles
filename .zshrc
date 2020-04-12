@@ -115,7 +115,7 @@ unset fdir func
 
 source $HOME/.asdf/asdf.sh
 
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv'
+alias config='/usr/bin/hub --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv'
 
 export GOPATH=~/Documents/projects/go
 
@@ -126,7 +126,7 @@ export GIT_AUTO_FETCH_INTERVAL=86400
 
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
-alias auth='ykman oath code "$(ykman oath list | fzf)"'
+alias auth='ykman -d 6506058 oath code "$(ykman -d 6506058  oath list | fzf)"'
 alias wdd='wd "$(wd list | fzf | awk '\''{print $1}'\'')"'
 
 # added by travis gem

@@ -37,6 +37,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-unimpaired'
 
 
 Plug 'sbdchd/neoformat'
@@ -111,8 +113,10 @@ Plug 'jelera/vim-javascript-syntax'
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+
 Plug 'sheerun/vim-polyglot'
 call plug#end()
+
 
 let g:polyglot_disabled = ['go']
 let g:deoplete#enable_at_startup = 1
@@ -131,7 +135,7 @@ let g:go_auto_sameids = 1
 
 augroup NeoformatAutoFormat
   autocmd!
-  autocmd BufWritePre *.{js,jsx,css,scss,ex,exs,rb,rabl,rake,html,json,yaml,erb,rb} Neoformat
+  autocmd BufWritePre *.{js,jsx,css,scss,ex,exs,rb,rabl,rake,html,json,yaml,erb,rb,rs} Neoformat
 augroup END
 
 " explicit TAB for deoplete
@@ -142,21 +146,15 @@ endfunction"}}}
 
 ""use TAB as the mapping
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ?  "\<C-n>" :
+      \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
-      \ deoplete#mappings#manual_complete()
-
+      \ deoplete#manual_complete()
 inoremap <silent><expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
 
 
 " Required:
 filetype plugin indent on
-
-" Let <Tab> also do completion
-inoremap <silent><expr> <S-Tab>
-\ pumvisible() ? "\<C-n>" :
-\ deoplete#mappings#manual_complete()
 
 
 "*****************************************************************************
@@ -258,7 +256,7 @@ tnoremap <Esc> <C-\><C-n>
 
 " Run Neomake when I save any buffer
 " augroup localneomake
-"   autocmd! BufWritePost * Neomake
+"   aut/cmd! BufWritePost * Neomake
 " augroup END
 
 " let g:neomake_javascript_enabled_makers = ['eslint']
@@ -398,6 +396,9 @@ nnoremap - :Explore<CR>
 nnoremap <Leader>f :Explore .<CR>
 nnoremap <leader>aj :ALENext<cr>
 nnoremap <silent> <leader>ak :ALEPrevious<cr>
+
+nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <leader>c :!cargo clippy
 
 " snippets
 let g:UltiSnipsExpandTrigger="<tab>"
