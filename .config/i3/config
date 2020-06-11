@@ -59,6 +59,9 @@ bindsym $mod+Return exec tilix --working-directory="`xcwd`"
 # kill focused window
 bindsym $mod+Shift+q kill
 
+#Switch to dual layout
+bindsym $mod+Shift+d exec "~/.config/i3/scripts/dual-displays.sh"
+
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -width 100 -padding 500 -opacity "80" -bw 0 -bc "$base01" -bg "$base02" -fg "$base07" -hlbg "$base05" -columns 2 -font "System San Francisco Display 18" -hlfg "#9575cd"
 
@@ -131,9 +134,9 @@ bindsym Control+Escape exec xdotool key Caps_Lock
 set $displayMode "Set display mode [d]ual [l]aptop [h]ome"
 bindsym $mod+Shift+i mode $displayMode
 mode $displayMode {
-    bindsym d exec "~/.config/i3/scripts/dual-displays.sh"
-    bindsym l exec "~/.config/i3/scripts/laptop-display.sh"
-    bindsym h exec "~/.config/i3/scripts/home.sh"
+    bindsym d exec "~/.config/i3/scripts/dual-displays.sh", mode "default"
+    bindsym l exec "~/.config/i3/scripts/laptop-display.sh", mode "default"
+    bindsym h exec "~/.config/i3/scripts/home.sh", mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
