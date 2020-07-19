@@ -1,15 +1,5 @@
 {
   "codeLens.enable": true,
-  "diagnostic-languageserver.filetypes": {
-    "elixir": [
-      "mix_credo",
-      "mix_credo_compile"
-    ],
-    "eelixir": [
-      "mix_credo",
-      "mix_credo_compile"
-    ]
-  },
   "languageserver": {
     "golang": {
       "command": "gopls",
@@ -22,6 +12,13 @@
       "filetypes": [
         "go"
       ]
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": [
+        "terraform"
+      ],
+      "initializationOptions": {}
     }
   }
 }

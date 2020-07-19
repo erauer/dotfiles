@@ -40,6 +40,8 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
 
+Plug 'rstacruz/vim-closer'
+
 
 Plug 'sbdchd/neoformat'
 " Plug 'benekastah/neomake'
@@ -57,7 +59,10 @@ Plug 'honza/vim-snippets'
 Plug 'mhartington/oceanic-next'
 Plug 'gh123man/vim-atom-dark-modded-256'
 Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.7' }
+Plug 'joshdick/onedark.vim'
 Plug 'kassio/neoterm'
+Plug 'rakr/vim-one'
+Plug 'skbolton/embark'
 " Plug 'tomasr/molokai'
 " Plug 'chriskempson/base16-vim'
 
@@ -79,6 +84,9 @@ Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 
 Plug 'jwilm/i3-vim-focus'
+
+" VimWiki
+Plug 'vimwiki/vimwiki'
 
 "*****************************************************************************
 "" Custom bundles
@@ -117,11 +125,18 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'sheerun/vim-polyglot'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
- Plug 'elixir-lsp/elixir-ls', { 'do': { -> g:ElixirLS.compile() } }
-
+Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'fannheyward/coc-rust-analyzer', {'do': 'yarn install --frozen-lockfile'}
+Plug 'drewtempelmeyer/palenight.vim'
 call plug#end()
 
+let g:vimwiki_list = [
+                        \{'path': '~/Documents/VimWiki/personal.wiki'},
+                        \{'path': '~/Documents/VimWiki/tech.wiki'}
+                \]
 
+au BufRead,BufNewFile *.wiki set filetype=vimwiki
 let g:polyglot_disabled = ['go']
 " let g:deoplete#enable_at_startup = 1
 " let g:deoplete#disable_auto_complete = 0
@@ -138,55 +153,56 @@ let g:go_auto_sameids = 1
 let g:go_def_mapping_enabled = 0
 " #let g:go_build_tags = prod"
 
-let g:coc_global_extensions = ['coc-elixir', 'coc-diagnostic']
-let g:ElixirLS = {}
-let ElixirLS.path = stdpath('config').'/plugged/elixir-ls'
-let ElixirLS.lsp = ElixirLS.path.'/release/language_server.sh'
-let ElixirLS.cmd = join([
-        \ 'asdf install &&',
-        \ 'mix do',
-        \ 'local.hex --force --if-missing,',
-        \ 'local.rebar --force,',
-        \ 'deps.get,',
-        \ 'compile,',
-        \ 'elixir_ls.release'
-        \ ], ' ')
+let g:coc_global_extensions = ['coc-diagnostic']
+"let g:ElixirLS = {}
+"let ElixirLS.path = stdpath('config').'/plugged/elixir-ls'
+"let ElixirLS.lsp = ElixirLS.path.'/release/language_server.sh'
+" let ElixirLS.cmd = join([
+"         \ 'asdf install &&',
+"         \ 'mix do',
+"         \ 'local.hex --force --if-missing,',
+"         \ 'local.rebar --force,',
+"         \ 'deps.get,',
+"         \ 'compile,',
+"         \ 'elixir_ls.release'
+"         \ ], ' ')
 
 
-function ElixirLS.on_stdout(_job_id, data, _event)
-  let self.output[-1] .= a:data[0]
-  call extend(self.output, a:data[1:])
-endfunction
+" function ElixirLS.on_stdout(_job_id, data, _event)
+"   let self.output[-1] .= a:data[0]
+"   call extend(self.output, a:data[1:])
+" endfunction
 
-let ElixirLS.on_stderr = function(ElixirLS.on_stdout)
+" let ElixirLS.on_stderr = function(ElixirLS.on_stdout)
 
-function ElixirLS.on_exit(_job_id, exitcode, _event)
-  if a:exitcode[0] == 0
-    echom '>>> ElixirLS compiled'
-  else
-    echoerr join(self.output, ' ')
-    echoerr '>>> ElixirLS compilation failed'
-  endif
-endfunction
+" function ElixirLS.on_exit(_job_id, exitcode, _event)
+"   if a:exitcode[0] == 0
+"     echom '>>> ElixirLS compiled'
+"   else
+"     echoerr join(self.output, ' ')
+"     echoerr '>>> ElixirLS compilation failed'
+"   endif
+" endfunction
 
-function ElixirLS.compile()
-  let me = copy(g:ElixirLS)
-  let me.output = ['']
-  echom '>>> compiling ElixirLS'
-  let me.id = jobstart('cd ' . me.path . ' && git pull && ' . me.cmd, me)
-endfunction
+" function ElixirLS.compile()
+"   let me = copy(g:ElixirLS)
+"   let me.output = ['']
+"   echom '>>> compiling ElixirLS'
+"   let me.id = jobstart('cd ' . me.path . ' && git pull && ' . me.cmd, me)
+" endfunction
 
 " Then, update the Elixir language server
-call coc#config('elixir', {
-  \ 'command': g:ElixirLS.lsp,
-  \ 'filetypes': ['elixir', 'eelixir']
-  \})
-call coc#config('elixir.pathToElixirLS', g:ElixirLS.lsp)
+"call coc#config('elixir', {
+"  \ 'command': g:ElixirLS.lsp,
+"  \ 'filetypes': ['elixir', 'eelixir']
+"  \})
+"call coc#config('elixir.pathToElixirLS', g:ElixirLS.lsp)
 
 augroup NeoformatAutoFormat
   autocmd!
   autocmd BufWritePre *.{js,jsx,css,scss,ex,exs,rb,rabl,rake,html,json,yaml,erb,rb,rs} Neoformat
 augroup END
+
 
 " explicit TAB for deoplete
 "function! s:check_back_space() abort "{{{
@@ -206,6 +222,7 @@ augroup END
 " Required:
 filetype plugin indent on
 
+autocmd Filetype rust compiler cargo
 
 "*****************************************************************************
 "" Basic Setup
@@ -229,6 +246,7 @@ set expandtab
 
 "" Map leader to ,
 let g:mapleader=','
+let g:vimwiki_global_ext = 0
 
 "" Enable hidden buffers
 set hidden
@@ -271,6 +289,13 @@ syntax on
 set ruler
 set number
 
+"if (has("autocmd") && !has("gui_running"))
+"  augroup colorset
+"  autocmd!
+"    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+"    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
+"  augroup END
+"endif
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
@@ -282,7 +307,10 @@ if !exists('g:not_finish_vimplug')
   syntax enable
 
   set background=dark
+  colorscheme onedark
   colorscheme jellybeans
+  "colorscheme one
+  "colorscheme embark
 endif
 
 
@@ -444,8 +472,6 @@ noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap - :Explore<CR>
 " nnoremap <Leader>f :Explore <C-r>=getcwd()<CR><CR>
 nnoremap <Leader>f :Explore .<CR>
-nnoremap <leader>aj :ALENext<cr>
-nnoremap <silent> <leader>ak :ALEPrevious<cr>
 
 nnoremap <Leader>b :ls<CR>:b<Space>
 nnoremap <leader>c :!cargo clippy
@@ -670,6 +696,8 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gj <Plug>(coc-diagnostic-prev)
+nmap <silent> gk <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -760,3 +788,23 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" if has('nvim')
+"   let g:terminal_color_0  = "#929292"
+"  let g:terminal_color_1 = "#e27373"
+"   let g:terminal_color_2 = "#94b979"
+"   let g:terminal_color_3 = "#ffba7b"
+"  let g:terminal_color_4 = '#84a0c6'
+"  let g:terminal_color_5 = "#e1c0fa"
+"   let g:terminal_color_6 = "#00988e"
+ "let g:terminal_color_7 = "#dedede"
+ " let g:terminal_color_8 = "#bdbdbd"
+ " let g:terminal_color_9 = "#ffa1a1"
+ " let g:terminal_color_10 = "#bddeab"
+"  let g:terminal_color_11 = "#ffdca0"
+"  let g:terminal_color_12 = "#b1d8f6"
+"  let g:terminal_color_13 = "#fbdaff"
+"  let g:terminal_color_14 = "#1ab2a8"
+"  let g:terminal_color_15 = "#ffffff"
+"else
+"  let g:terminal_ansi_colors = ['#1e2132', '#e27878', '#b4be82', '#e2a478', '#84a0c6', '#a093c7', '#89b8c2', '#c6c8d1', '#6b7089', '#e98989', '#c0ca8e', '#e9b189', '#91acd1', '#ada0d3', '#95c4ce', '#d2d4de']
+"endif
