@@ -473,7 +473,7 @@ nnoremap - :Explore<CR>
 " nnoremap <Leader>f :Explore <C-r>=getcwd()<CR><CR>
 nnoremap <Leader>f :Explore .<CR>
 
-nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <Leader>b :Buffers .<CR>
 nnoremap <leader>c :!cargo clippy
 
 " snippets
