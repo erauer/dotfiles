@@ -10,7 +10,11 @@ ZSH_CUSTOM=$HOME/.config/zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="erauer"
+if [ -f $HOME/.oh-my-zsh/themes/erauer.zsh-theme ]; then
+  ZSH_THEME="erauer"
+else
+  ZSH_THEME="robbyrussell"
+fi
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -115,7 +119,7 @@ unset fdir func
 
 source $HOME/.asdf/asdf.sh
 
-alias config='/usr/bin/hub --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv'
 
 export GOPATH=~/Documents/projects/go
 
