@@ -1,8 +1,10 @@
 
 elixir 1.9.4-otp-22
-erlang 22.1.7
+erlang 22.3.3
 nodejs 10.16.0
 ruby 2.4.4
-python 3.6.8
 elm 0.18.0
-golang 1.13.1
+golang 1.14.1
+python 3.8.1
+terraform 0.12.26
+java adopt-openjdk-13.0.1+9

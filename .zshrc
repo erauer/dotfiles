@@ -10,7 +10,7 @@ ZSH_CUSTOM=$HOME/.config/zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="edvardm"
+ZSH_THEME="erauer"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -115,7 +115,7 @@ unset fdir func
 
 source $HOME/.asdf/asdf.sh
 
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv'
+alias config='/usr/bin/hub --git-dir=$HOME/.cfg/ --work-tree=$HOME $argv'
 
 export GOPATH=~/Documents/projects/go
 
@@ -126,7 +126,7 @@ export GIT_AUTO_FETCH_INTERVAL=86400
 
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
-alias auth='ykman oath code "$(ykman oath list | fzf)"'
+alias auth='ykman -d 6506058 oath code "$(ykman -d 6506058  oath list | fzf)"'
 alias wdd='wd "$(wd list | fzf | awk '\''{print $1}'\'')"'
 
 # added by travis gem
@@ -145,6 +145,9 @@ export PATH=$PATH:$HOME/bin
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
+
+export AWS_PROFILE=bcd
+export AWS_DEFAULT_REGION=us-west-2
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
@@ -158,3 +161,9 @@ if [ -f '/home/eric/Documents/tools/google-cloud-sdk/path.zsh.inc' ]; then . '/h
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/eric/Documents/tools/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/eric/Documents/tools/google-cloud-sdk/completion.zsh.inc'; fi
+
+export SAM_CLI_TELEMETRY=0
+
+alias vi=nvim
+eval $(thefuck --alias)
+#eval "$(direnv hook zsh)"
