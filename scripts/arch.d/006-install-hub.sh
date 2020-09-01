@@ -1,3 +1,3 @@
 #!/bin/bash
 
-yay -S hub
+yes | yay -S hub

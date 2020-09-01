@@ -4,4 +4,4 @@ set -e
 
 sudo -v
 
-yay -S bat
+yes | yay -S bat

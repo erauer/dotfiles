@@ -4,4 +4,4 @@ set -e
 
 sudo -v
 
-yay -S neovim
+yes | yay -S neovim

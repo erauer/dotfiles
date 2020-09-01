@@ -1,3 +1,3 @@
 #!/bin/bash
 
-yay -S thefuck
+yes | yay -S thefuck
