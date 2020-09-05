@@ -129,14 +129,14 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 #Toggle Caps_Lock
-bindsym Control+Escape exec xdotool key Caps_Lock
+# bindsym Control+Escape exec xdotool key Caps_Lock
 
 set $displayMode "Set display mode [d]ual [l]aptop [h]ome"
 bindsym $mod+Shift+i mode $displayMode
 mode $displayMode {
-    bindsym d mode "default"; exec "~/.config/i3/scripts/dual-displays.sh"
-    bindsym l mode "default"; exec "~/.config/i3/scripts/laptop-display.sh"
-    bindsym h mode "default"; exec "~/.config/i3/scripts/home.sh"
+    bindsym d mode "default"; exec "autorandr --load docked --force"
+    bindsym l mode "default"; exec "autorandr --load laptop --force"
+    bindsym h mode "default"; exec "autorandr --load home --force"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -266,7 +266,7 @@ exec --no-startup-id solaar -w hide
 bindsym XF86MonBrightnessUp exec  brightnessctl set 10%+# increase screen brightness
 bindsym XF86MonBrightnessDown exec brightnessctl set 10%- # decrease screen brightness
 
-exec --no-startup-id setxkbmap -layout us -option caps:escape
+# exec --no-startup-id setxkbmap -layout us -option caps:escape
 
 exec --no-startup-id $HOME/.config/i3/scripts/dual-displays.sh
 
