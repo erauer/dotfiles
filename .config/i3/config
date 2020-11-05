@@ -203,10 +203,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -247,9 +247,9 @@ bindsym $mod+Shift+x exec i3lock -f -c 333333
 bindsym $mod+x [urgent=latest] focus
 
 # Keyboard backlight
-exec --no-startup-id msiklm off
-bindsym $mod+Shift+b exec msiklm white low
-bindsym $mod+Shift+o exec msiklm off
+#exec --no-startup-id msiklm off
+#bindsym $mod+Shift+b exec msiklm white low
+#bindsym $mod+Shift+o exec msiklm off
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
