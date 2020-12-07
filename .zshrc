@@ -156,8 +156,10 @@ export AWS_PROFILE=bcd
 export AWS_DEFAULT_REGION=us-west-2
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
-eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
-export SSH_AUTH_SOCK
+if [[ -n $SSH_CONNECTION ]]; then
+  eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
+  export SSH_AUTH_SOCK
+fi
 
 alias status="echo $?"
 eval $(hub alias -s)
