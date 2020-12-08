@@ -2,7 +2,7 @@
 
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0-rc1
 
-source . ~/.asdf/asdf.sh
+source ~/.asdf/asdf.sh
 
 # sudo apt-get install libssl-dev libncurses5-dev build-essential -y
 
