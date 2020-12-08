@@ -1,0 +1,7 @@
+function riot() {
+  trap 'kill %${(k)^jobstates}' EXIT
+  mitmweb --set  keep_host_header=true --set web_open_browser=false --set web_port=5080 --set showhost=true -p  7080 --mode reverse:http://127.0.0.1:8080 &
+  mitmweb --set  keep_host_header=true --set web_open_browser=false --set web_port=5880 --set showhost=true -p  7880 --mode reverse:http://127.0.0.1:8880 &
+  mitmweb --set  keep_host_header=true --set web_open_browser=false --set web_port=5888 --set showhost=true -p  7888 --mode reverse:http://127.0.0.1:8888 &
+  pktriot start
+}

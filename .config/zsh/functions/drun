@@ -1,0 +1,7 @@
+function drun () {
+  local NAME="test`date +%s`";
+  docker rm -f $NAME;
+  docker build . -t "$NAME";
+  docker run --name "$NAME" -e TERM -it "$NAME" /bin/bash
+  docker rm -f "$NAME"
+}

@@ -10,11 +10,12 @@ ZSH_CUSTOM=$HOME/.config/zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-if [ -f $HOME/.oh-my-zsh/themes/erauer.zsh-theme ]; then
+if [ -f $HOME/.config/zsh/themes/erauer.zsh-theme ]; then
   ZSH_THEME="erauer"
 else
   ZSH_THEME="robbyrussell"
 fi
+
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -68,6 +69,7 @@ plugins=(
   vi-mode
   mix
   wd
+  history
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -154,8 +156,10 @@ export AWS_PROFILE=bcd
 export AWS_DEFAULT_REGION=us-west-2
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
-eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
-export SSH_AUTH_SOCK
+if [[ -n $SSH_CONNECTION ]]; then
+  eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
+  export SSH_AUTH_SOCK
+fi
 
 alias status="echo $?"
 eval $(hub alias -s)

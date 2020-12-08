@@ -1,7 +1,3 @@
 keycode 224 = XF86MonBrightnessDown
 keycode 115 = XF86AudioRaiseVolume
 keycode 78  = XF86AudioMute
-remove lock = Caps_Lock
-keysym Escape = Caps_Lock
-keysym Caps_Lock = Escape
-add lock = Caps_Lock

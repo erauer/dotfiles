@@ -20,5 +20,9 @@
       ],
       "initializationOptions": {}
     }
-  }
+  },
+  "coc.preferences.formatOnSaveFiletypes": [
+    "js",
+    "javascript"
+  ]
 }
