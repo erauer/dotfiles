@@ -1,0 +1,17 @@
+#!/bin/bash
+
+command -v _wd > /dev/null && command -v rofi > /dev/null 2>&1 || exit 1
+
+prj=$(_wd --list | awk '{print $1}'| rofi -dmenu -p "Search > " "$@")
+
+if [ -z "$prj" ]; then exit 0
+else
+  path=$(_wd --path "$prj")
+  tilix --working-directory="$path" --command "nvim ."
+fi
+
+
+
+
+
+

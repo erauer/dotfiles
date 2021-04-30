@@ -81,12 +81,19 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
+if [[ -n $SSH_CONNECTION ]]; then
+  eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
+  export SSH_AUTH_SOCK
+fi
+
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #  export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
+#
 
 export EDITOR='nvim'
 # Compilation flags
@@ -103,6 +110,9 @@ export EDITOR='nvim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+
+alias pie='http'
 
 alias cat='bat'
 

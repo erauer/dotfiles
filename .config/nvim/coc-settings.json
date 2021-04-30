@@ -1,28 +1,41 @@
 {
   "codeLens.enable": true,
+  "diagnostic-languageserver.filetypes": {
+    "sh": "shellcheck"
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "sh": "shfmt"
+  },
+  "diagnostic.checkCurrentLine": true,
   "languageserver": {
     "golang": {
       "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform"],
+      "initializationOptions": {}
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
       "rootPatterns": [
-        "go.mod",
+        ".ccls",
+        "compile_commands.json",
         ".vim/",
         ".git/",
         ".hg/"
       ],
-      "filetypes": [
-        "go"
-      ]
-    },
-    "terraform": {
-      "command": "terraform-lsp",
-      "filetypes": [
-        "terraform"
-      ],
-      "initializationOptions": {}
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
     }
   },
-  "coc.preferences.formatOnSaveFiletypes": [
-    "js",
-    "javascript"
-  ]
+  "rust-analyzer.updates.channel": "nightly",
+  "coc.preferences.formatOnSaveFiletypes": ["js", "javascript"],
+  "elixir.pathToElixirLS": "~/.config/nvim/plugged/coc-elixir/els-release/language_server.sh"
 }

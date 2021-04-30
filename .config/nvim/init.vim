@@ -6,6 +6,7 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
+let g:polyglot_disabled = ['css']
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
 if !filereadable(vimplug_exists)
@@ -20,6 +21,8 @@ if !filereadable(vimplug_exists)
 
   autocmd VimEnter * PlugInstall
 endif
+
+
 
 " Required:
 call plug#begin(expand('~/.config/nvim/plugged'))
@@ -40,7 +43,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-unimpaired'
 
-Plug 'rstacruz/vim-closer'
+"Plug 'rstacruz/vim-closer'
 
 
 Plug 'sbdchd/neoformat'
@@ -63,6 +66,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'kassio/neoterm'
 Plug 'rakr/vim-one'
 Plug 'skbolton/embark'
+Plug 'folke/tokyonight.nvim'
+
 " Plug 'tomasr/molokai'
 " Plug 'chriskempson/base16-vim'
 
@@ -70,12 +75,12 @@ Plug 'skbolton/embark'
 " Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 " Plug 'zchee/deoplete-go', { 'do': 'make'}
 "
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 Plug 'rking/ag.vim'
 Plug 'jaawerth/nrun.vim'
 
-Plug 'mhartington/nvim-typescript'
+" Plug 'mhartington/nvim-typescript'
 
 Plug 'lambdalisue/suda.vim'
 
@@ -83,10 +88,13 @@ Plug 'lambdalisue/suda.vim'
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 
-Plug 'jwilm/i3-vim-focus'
+" Plug 'jwilm/i3-vim-focus'
+Plug 'termhn/i3-vim-nav'
 
 " VimWiki
 Plug 'vimwiki/vimwiki'
+
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 
 "*****************************************************************************
 "" Custom bundles
@@ -128,29 +136,35 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 Plug 'fannheyward/coc-rust-analyzer', {'do': 'yarn install --frozen-lockfile'}
+Plug 'iamcco/coc-diagnostic', {'do': 'yarn install --frozen-lockfile && yarn build'}
+
 Plug 'drewtempelmeyer/palenight.vim'
 call plug#end()
 
-let g:vimwiki_list = [
-                        \{'path': '~/Documents/VimWiki/personal.wiki'},
-                        \{'path': '~/Documents/VimWiki/tech.wiki'}
-                \]
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+let g:instant_markdown_autostart = 0	" disable autostart
+
+map <Leader>md :InstantMarkdownPreview<CR>
 
 au BufRead,BufNewFile *.wiki set filetype=vimwiki
-let g:polyglot_disabled = ['go']
 " let g:deoplete#enable_at_startup = 1
 " let g:deoplete#disable_auto_complete = 0
 " call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.15/bin/python'
-let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.6.8/bin/python3'
+let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.8.1/bin/python3'
 
 let g:go_addtags_transform = "snakecase"
 let g:go_version_warning = 0
-let g:go_fmt_command = "gofmt"
+let g:go_fmt_command = "gofumpt"
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 let g:go_def_mapping_enabled = 0
+let g:go_fmt_command = "gopls"
+let g:go_gopls_gofumpt=1
 " #let g:go_build_tags = prod"
 
 let g:coc_global_extensions = ['coc-diagnostic']
@@ -200,7 +214,7 @@ let g:coc_global_extensions = ['coc-diagnostic']
 
 augroup NeoformatAutoFormat
   autocmd!
-  autocmd BufWritePre *.{js,jsx,css,scss,ex,exs,rb,rabl,rake,html,json,yaml,erb,rb,rs} Neoformat
+  autocmd BufWritePre *.{js,jsx,css,scss,ex,exs,rb,rabl,rake,json,yaml,erb,rb,rs} undojoin |  Neoformat
 augroup END
 
 
@@ -308,6 +322,7 @@ if !exists('g:not_finish_vimplug')
 
   set background=dark
   colorscheme onedark
+"  colorscheme tokyonight
   colorscheme jellybeans
   "colorscheme one
   "colorscheme embark
@@ -391,7 +406,7 @@ set modelines=10
 " Set the title of the iterm tab
 set title
 set titleold="Terminal"
-set titlestring=%F\ NVIM
+set titlestring=%F\ nvim
 
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
@@ -471,12 +486,13 @@ set autoread
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap - :Explore<CR>
 " nnoremap <Leader>f :Explore <C-r>=getcwd()<CR><CR>
-nnoremap <Leader>f :Explore .<CR>
+nnoremap <leader>f :Explore .<CR>
 
 nnoremap <Leader>b :Buffers .<CR>
 nnoremap <leader>c :!cargo clippy
 
-" snippets
+
+": snippets
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
@@ -640,171 +656,15 @@ else
 endif
 
 "  i3 vim focus
-map gwl :call Focus('right', 'l')<CR>
-map gwh :call Focus('left', 'h')<CR>
-map gwk :call Focus('up', 'k')<CR>
-map gwj :call Focus('down', 'j')<CR>
+" map gwl :call Focus('right', 'l')<CR>
+" map gwh :call Focus('left', 'h')<CR>
+" map gwk :call Focus('up', 'k')<CR>
+" map gwj :call Focus('down', 'j')<CR>
 
-" coc.nvim
-"
-" TextEdit might fail if hidden is not set.
-set hidden
+" i3 integration
+nnoremap <silent> <c-l> :call Focus('right', 'l')<CR>
+nnoremap <silent> <c-h> :call Focus('left', 'h')<CR>
+nnoremap <silent> <c-k> :call Focus('up', 'k')<CR>
+nnoremap <silent> <c-j> :call Focus('down', 'j')<CR>
 
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-set signcolumn=yes
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-"if exists('*complete_info')
-"  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-"else
-"  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-"endif
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> gj <Plug>(coc-diagnostic-prev)
-nmap <silent> gk <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Introduce function text object
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <TAB> for selections ranges.
-" NOTE: Requires 'textDocument/selectionRange' support from the language server.
-" coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings using CoCList:
-" Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-" if has('nvim')
-"   let g:terminal_color_0  = "#929292"
-"  let g:terminal_color_1 = "#e27373"
-"   let g:terminal_color_2 = "#94b979"
-"   let g:terminal_color_3 = "#ffba7b"
-"  let g:terminal_color_4 = '#84a0c6'
-"  let g:terminal_color_5 = "#e1c0fa"
-"   let g:terminal_color_6 = "#00988e"
- "let g:terminal_color_7 = "#dedede"
- " let g:terminal_color_8 = "#bdbdbd"
- " let g:terminal_color_9 = "#ffa1a1"
- " let g:terminal_color_10 = "#bddeab"
-"  let g:terminal_color_11 = "#ffdca0"
-"  let g:terminal_color_12 = "#b1d8f6"
-"  let g:terminal_color_13 = "#fbdaff"
-"  let g:terminal_color_14 = "#1ab2a8"
-"  let g:terminal_color_15 = "#ffffff"
-"else
-"  let g:terminal_ansi_colors = ['#1e2132', '#e27878', '#b4be82', '#e2a478', '#84a0c6', '#a093c7', '#89b8c2', '#c6c8d1', '#6b7089', '#e98989', '#c0ca8e', '#e9b189', '#91acd1', '#ada0d3', '#95c4ce', '#d2d4de']
-"endif
+source $HOME/.config/nvim/coc.vim

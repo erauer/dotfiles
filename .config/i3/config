@@ -65,6 +65,10 @@ bindsym $mod+Shift+d exec "~/.config/i3/scripts/dual-displays.sh"
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show run -lines 5 -eh 2 -width 100 -padding 500 -opacity "80" -bw 0 -bc "$base01" -bg "$base02" -fg "$base07" -hlbg "$base05" -columns 2 -font "System San Francisco Display 18" -hlfg "#9575cd"
 
+bindsym $mod+i exec rofi -show drun -lines 5 -eh 2 -width 100 -padding 500 -opacity "80" -bw 0 -bc "$base01" -bg "$base02" -fg "$base07" -hlbg "$base05" -columns 2 -font "System San Francisco Display 18" -hlfg "#9575cd"
+
+bindsym $mod+b exec /home/eric/bin/rofi-wd -lines 5 -eh 2 -width 100 -padding 500 -opacity "80" -bw 0 -bc "$base01" -bg "$base02" -fg "$base07" -hlbg "$base05" -columns 2 -font "System San Francisco Display 18" -hlfg "#9575cd"
+
 bindsym $mod+Tab exec rofi -show window -lines 5 -eh 2 -width 100 -padding 500 -opacity "80" -bw 0 -bc "$base01" -bg "$base02" -fg "$base07" -hlbg "$base05" -columns 2 -font "System San Francisco Display 18" -hlfg "#9575cd"
 #bindsym $mod+d exec i3-dmenu-desktop
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -78,11 +82,15 @@ bindsym $mod+Tab exec rofi -show window -lines 5 -eh 2 -width 100 -padding 500 -
 #bindsym $mod+k focus up
 #bindsym $mod+l focus right
 
-bindsym --release  $mod+h exec "/home/eric/.local/bin/i3-vim-focus left"
-bindsym --release  $mod+j exec "/home/eric/.local/bin/i3-vim-focus down"
-bindsym --release  $mod+k exec "/home/eric/.local/bin/i3-vim-focus up"
-bindsym --release  $mod+l exec "/home/eric/.local/bin/i3-vim-focus right"
+# bindsym --release  $mod+h exec "/home/eric/.local/bin/i3-vim-focus left"
+# bindsym --release  $mod+j exec "/home/eric/.local/bin/i3-vim-focus down"
+# bindsym --release  $mod+k exec "/home/eric/.local/bin/i3-vim-focus up"
+# bindsym --release  $mod+l exec "/home/eric/.local/bin/i3-vim-focus right"
 
+bindsym --release $mod+h exec --no-startup-id "/home/eric/.local/bin/i3-vim-nav h"
+bindsym --release $mod+j exec --no-startup-id "/home/eric/.local/bin/i3-vim-nav j"
+bindsym --release $mod+k exec --no-startup-id "/home/eric/.local/bin/i3-vim-nav k"
+bindsym --release $mod+l exec --no-startup-id "/home/eric/.local/bin/i3-vim-nav l"
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -304,3 +312,7 @@ bindsym $mod+Print exec "sleep 0.2; scrot -q 100 -s ${HOME}'/Pictures/Screenshot
 
 # Screenshot current focused window	# Screenshot current focused window
 bindsym Shift+Print exec "scrot -q 100 -u ${HOME}'/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_$wx$h.png'"
+
+exec_always --no-startup-id deadd-notification-center
+
+
