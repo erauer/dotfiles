@@ -54,7 +54,8 @@ font pango: Overpass Regular 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec tilix --working-directory="`xcwd`"
+#bindsym $mod+Return exec tilix --working-directory="`xcwd`"
+bindsym $mod+Return exec alacritty --working-directory="`xcwd`"
 
 # kill focused window
 bindsym $mod+Shift+q kill
