@@ -6,7 +6,6 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 endif
 
-let g:polyglot_disabled = ['css']
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
 if !filereadable(vimplug_exists)
@@ -22,125 +21,6 @@ if !filereadable(vimplug_exists)
   autocmd VimEnter * PlugInstall
 endif
 
-
-
-" Required:
-call plug#begin(expand('~/.config/nvim/plugged'))
-
-"*****************************************************************************
-"" Plug install packages
-"*****************************************************************************
-" Plug 'scrooloose/nerdtree'
-" Plug 'jistr/vim-nerdtree-tabs'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-unimpaired'
-
-"Plug 'rstacruz/vim-closer'
-
-
-Plug 'sbdchd/neoformat'
-" Plug 'benekastah/neomake'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
-
-"" Vim-Session
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-
-Plug 'honza/vim-snippets'
-
-"" Color
-Plug 'mhartington/oceanic-next'
-Plug 'gh123man/vim-atom-dark-modded-256'
-Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.7' }
-Plug 'joshdick/onedark.vim'
-Plug 'kassio/neoterm'
-Plug 'rakr/vim-one'
-Plug 'skbolton/embark'
-Plug 'folke/tokyonight.nvim'
-
-" Plug 'tomasr/molokai'
-" Plug 'chriskempson/base16-vim'
-
-" Plug 'rizzatti/dash.vim'
-" Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-" Plug 'zchee/deoplete-go', { 'do': 'make'}
-"
-" Plug 'w0rp/ale'
-
-Plug 'rking/ag.vim'
-Plug 'jaawerth/nrun.vim'
-
-" Plug 'mhartington/nvim-typescript'
-
-Plug 'lambdalisue/suda.vim'
-
-" Fzf
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-
-" Plug 'jwilm/i3-vim-focus'
-Plug 'termhn/i3-vim-nav'
-
-" VimWiki
-Plug 'vimwiki/vimwiki'
-
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-
-"*****************************************************************************
-"" Custom bundles
-"*****************************************************************************
-
-" elixir
-Plug 'elixir-lang/vim-elixir'
-Plug 'carlosgaldino/elixir-snippets'
-Plug 'slashmili/alchemist.vim'
-Plug 'powerman/vim-plugin-AnsiEsc'
-
-
-" erlang
-Plug 'jimenezrick/vimerl'
-
-
-" html
-"" HTML Bundle
-Plug 'hail2u/vim-css3-syntax'
-Plug 'gorodinskiy/vim-coloresque'
-Plug 'tpope/vim-haml'
-Plug 'mattn/emmet-vim'
-
-" PlantUML
-
-Plug 'scrooloose/vim-slumlord'
-
-" javascript
-"" Javascript Bundle
-Plug 'jelera/vim-javascript-syntax'
-
-" Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-
-Plug 'sheerun/vim-polyglot'
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'fannheyward/coc-rust-analyzer', {'do': 'yarn install --frozen-lockfile'}
-Plug 'iamcco/coc-diagnostic', {'do': 'yarn install --frozen-lockfile && yarn build'}
-
-Plug 'drewtempelmeyer/palenight.vim'
-call plug#end()
 
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
@@ -667,5 +547,12 @@ nnoremap <silent> <c-l> :call Focus('right', 'l')<CR>
 nnoremap <silent> <c-h> :call Focus('left', 'h')<CR>
 nnoremap <silent> <c-k> :call Focus('up', 'k')<CR>
 nnoremap <silent> <c-j> :call Focus('down', 'j')<CR>
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fl <cmd>Telescope git_files<cr
 
 source $HOME/.config/nvim/coc.vim
