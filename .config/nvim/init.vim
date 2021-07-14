@@ -85,8 +85,9 @@ Plug 'jaawerth/nrun.vim'
 Plug 'lambdalisue/suda.vim'
 
 " Fzf
-Plug '/usr/bin/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
 
 " Plug 'jwilm/i3-vim-focus'
 Plug 'termhn/i3-vim-nav'
