@@ -21,7 +21,6 @@ end
 
 plug(tostring(os.getenv("HOME")) .. '/.vim/plugged', {
   'tpope/vim-commentary',
-  'tpope/vim-commentary',
   'tpope/vim-fugitive',
   'tpope/vim-sensible',
   'tpope/vim-surround',
@@ -56,13 +55,16 @@ plug(tostring(os.getenv("HOME")) .. '/.vim/plugged', {
   'rking/ag.vim', 'jaawerth/nrun.vim',
 
   'lambdalisue/suda.vim',
-  'junegunn/fzf.vim',
 
   'termhn/i3-vim-nav',
   'vimwiki/vimwiki',
   {'suan/vim-instant-markdown', ['for'] = 'markdown'},
 
-  'elixir-lang/vim-elixir', 'carlosgaldino/elixir-snippets', 'slashmili/alchemist.vim', 'powerman/vim-plugin-AnsiEsc',
+  'elixir-lang/vim-elixir',
+  'carlosgaldino/elixir-snippets',
+   --'slashmili/alchemist.vim',
+
+  'powerman/vim-plugin-AnsiEsc',
 
   'jimenezrick/vimerl',
 
@@ -76,11 +78,20 @@ plug(tostring(os.getenv("HOME")) .. '/.vim/plugged', {
 
 
   'sheerun/vim-polyglot',
-  {'neoclide/coc.nvim', ['branch'] = 'release'},
-  {'elixir-lsp/coc-elixir', ['do'] = 'yarn install && yarn prepack'},
-  {'neoclide/coc-tsserver', ['do'] = 'yarn install --frozen-lockfile'},
-  {'fannheyward/coc-rust-analyzer', ['do'] = 'yarn install --frozen-lockfile'},
-  {'iamcco/coc-diagnostic', ['do'] = 'yarn install --frozen-lockfile && yarn build'},
+
+  -- {'neoclide/coc.nvim', ['branch'] = 'release'},
+  -- {'elixir-lsp/coc-elixir', ['do'] = 'yarn install && yarn prepack'},
+  -- {'neoclide/coc-tsserver', ['do'] = 'yarn install --frozen-lockfile'},
+  -- {'fannheyward/coc-rust-analyzer', ['do'] = 'yarn install --frozen-lockfile'},
+  -- {'iamcco/coc-diagnostic', ['do'] = 'yarn install --frozen-lockfile && yarn build'},
+
+  -- language server configurations
+  'neovim/nvim-lspconfig',
+
+  -- autocomplete and snippets
+  'hrsh7th/nvim-compe',
+  'hrsh7th/vim-vsnip',
+  'hrsh7th/vim-vsnip-integ',
 
   'nvim-lua/popup.nvim',
   'nvim-lua/plenary.nvim',

@@ -35,8 +35,8 @@ au BufRead,BufNewFile *.wiki set filetype=vimwiki
 " let g:deoplete#disable_auto_complete = 0
 " call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
-let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.15/bin/python'
-let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.8.1/bin/python3'
+" let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.15/bin/python'
+" let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.8.1/bin/python3'
 
 let g:go_addtags_transform = "snakecase"
 let g:go_version_warning = 0
@@ -555,4 +555,4 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fl <cmd>Telescope git_files<cr
 
-source $HOME/.config/nvim/coc.vim
+" source $HOME/.config/nvim/coc.vim

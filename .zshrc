@@ -81,10 +81,10 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-if [[ -n $SSH_CONNECTION ]]; then
-  eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
-  export SSH_AUTH_SOCK
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
+#   export SSH_AUTH_SOCK
+# fi
 
 
 # Preferred editor for local and remote sessions
@@ -114,7 +114,7 @@ export EDITOR='nvim'
 
 alias pie='http'
 
-alias cat='bat'
+alias cat='batcat'
 
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
@@ -166,13 +166,12 @@ export AWS_PROFILE=bcd
 export AWS_DEFAULT_REGION=us-west-2
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
-if [[ -n $SSH_CONNECTION ]]; then
-  eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
-  export SSH_AUTH_SOCK
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
+#   export SSH_AUTH_SOCK
+# fi
 
 alias status="echo $?"
-eval $(hub alias -s)
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/eric/Documents/tools/google-cloud-sdk/path.zsh.inc' ]; then . '/home/eric/Documents/tools/google-cloud-sdk/path.zsh.inc'; fi
@@ -185,3 +184,9 @@ export SAM_CLI_TELEMETRY=0
 alias vi=nvim
 eval $(thefuck --alias)
 #eval "$(direnv hook zsh)"
+if [ -e /home/eric/.nix-profile/etc/profile.d/nix.sh ]; then . /home/eric/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+eval $(hub alias -s)
+
+source ~/.config/gkr
+

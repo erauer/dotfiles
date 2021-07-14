@@ -34,7 +34,8 @@ set $base0F #fcc09e
 # is used in the bar {} block below.
 # font pango:monospace 8
 
-font pango: Overpass Regular 10
+#font pango: Overpass Regular 10
+font pango:System San Francisco Display 9
 # HiDPI
 # output eDP-1 scale 1
 
@@ -158,7 +159,7 @@ set $ws3 "3"
 set $ws4 "4:"
 set $ws5 "5"
 set $ws6 "6"
-set $ws7 "7:"
+set $ws7 "7:"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
@@ -301,7 +302,8 @@ exec_always --no-startup-id numlockx
 exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 exec --no-startup-id redshift-gtk
 
-exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
+#exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
+exec --not-startup-id /usr/lib/x86_64-linux-gnu/polkit-mate/polkit-mate-authentication-agent-1
 
 exec_always --no-startup-id autotiling
 
@@ -318,5 +320,7 @@ bindsym Shift+Print exec "scrot -q 100 -u ${HOME}'/Pictures/Screenshots/%Y-%m-%d
 #exec_always --no-startup-id deadd-notification-center
 exec_always --no-startup-id dunst
 
-exec setxkbmap -layout us -option caps:swapescape
+exec_always setxkbmap -layout us -option caps:swapescape
+
+exec gnome-keyring-daemon -r > ~/.config/gkr
 
